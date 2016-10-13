@@ -248,8 +248,7 @@ def execute_take(item_id):
     """This function takes an item_id as an argument and moves this item from the
     list of items in the current room to the player's inventory. However, if
     there is no such item in the room, this function prints
-    "You cannot take that."
-    """
+    "You cannot take that."""
     global inventory
     global current_room
 
