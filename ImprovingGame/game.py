@@ -133,7 +133,7 @@ def print_room(room):
     #
     # COMPLETE ME!
     #
-
+    pass
 def exit_leads_to(exits, direction):
     """This function takes a dictionary of exits and a direction (a particular
     exit taken from this dictionary). It returns the name of the room into which
@@ -164,7 +164,7 @@ def print_exit(direction, leads_to):
     """
     print("GO " + direction.upper() + " to " + leads_to + ".")
 
-
+    pass
 def print_menu(exits, room_items, inv_items):
     """This function displays the menu of available actions to the player. The
     argument exits is a dictionary of exits as exemplified in map.py. The
@@ -207,7 +207,7 @@ def print_menu(exits, room_items, inv_items):
     
     print("What do you want to do?")
 
-
+    pass
 def is_valid_exit(exits, chosen_exit):
     """This function checks, given a dictionary "exits" (see map.py) and
     a players's choice "chosen_exit" whether the player has chosen a valid exit.
@@ -226,7 +226,7 @@ def is_valid_exit(exits, chosen_exit):
     """
     return chosen_exit in exits
 
-
+    pass
 def execute_go(direction):
     """This function, given the direction (e.g. "south") updates the current room
     to reflect the movement of the player if the direction is a valid exit
@@ -314,7 +314,7 @@ def execute_command(command):
     else:
         print("This makes no sense.")
 
-
+        pass
 def menu(exits, room_items, inv_items):
     """This function, given a dictionary of possible exits from a room, and a list
     of items found in the room and carried by the player, prints the menu of
@@ -335,7 +335,7 @@ def menu(exits, room_items, inv_items):
 
     return normalised_user_input
 
-
+    pass
 def move(exits, direction):
     """This function returns the room into which the player will move if, from a
     dictionary "exits" of avaiable exits, they choose to move towards the exit
@@ -351,7 +351,7 @@ def move(exits, direction):
 
     # Next room to go to
     return rooms[exits[direction]]
-
+    pass
 
 # This is the entry point of our program
 def main():
