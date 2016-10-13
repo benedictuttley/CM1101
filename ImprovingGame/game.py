@@ -233,15 +233,15 @@ def execute_go(direction):
     (and prints the name of the room into which the player is
     moving). Otherwise, it prints "You cannot go there."
     """
+    
     global current_room
-   
-    if direction in  current_room["exits"]:
-        current_room = move(current_room["exits"], direction)
-        print(current_room["name"].upper())
-            
+
+    if is_valid_exit(current_room["exits"], direction):
+        current_room = rooms[current_room["exits"][direction]]
     else:
         print("You cannot go there.")
-    pass
+        pass
+
 
 
 def execute_take(item_id):
@@ -250,35 +250,31 @@ def execute_take(item_id):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    item_exists = False
+    global inventory
+    global current_room
+
     for item in current_room["items"]:
-        if item_id == item["id"]:
-            item_exists = True
-            current_room["items"].remove(item)
+        if item["id"] == item_id:
             inventory.append(item)
-            print(item["name"] + " added to inventory.")        
-    else:
-        print("You cannot take that")
-    pass
-    
+            current_room["items"].remove(item)
+            return
+    print("You cannot take that.")
 
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    item_now = False
+    global inventory
+    global current_room
 
-    
     for item in inventory:
-        if item_id == item["id"]:
-            item_now == True
+        if item["id"] == item_id:
             current_room["items"].append(item)
             inventory.remove(item)
-            print(item["name"] + " dropped from inventory")    
-    
-        if item_now == False:
-            print ("You cannot drop that.")
+            return
+    print("You cannot drop that.")
+            
     pass
     
 
@@ -375,4 +371,5 @@ def main():
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
     main()
+
 
