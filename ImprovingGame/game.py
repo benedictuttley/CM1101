@@ -257,6 +257,7 @@ def execute_take(item_id):
             current_room["items"].remove(item)
             inventory.append(item)
             print(item["name"] + " added to inventory.")        
+        return
     else:
         print("You cannot take that")
     pass
@@ -276,7 +277,7 @@ def execute_drop(item_id):
             current_room["items"].append(item)
             inventory.remove(item)
             print(item["name"] + " dropped from inventory")    
-    
+        return
         if item_now == False:
             print ("You cannot drop that.")
     pass
@@ -375,4 +376,5 @@ def main():
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
     main()
+
 
