@@ -233,47 +233,53 @@ def execute_go(direction):
     (and prints the name of the room into which the player is
     moving). Otherwise, it prints "You cannot go there."
     """
-    
     global current_room
-
-    if is_valid_exit(current_room["exits"], direction):
-        current_room = rooms[current_room["exits"][direction]]
+   
+    if direction in  current_room["exits"]:
+        current_room = move(current_room["exits"], direction)
+        print(current_room["name"].upper())
+            
     else:
         print("You cannot go there.")
-        pass
-
+    pass
 
 
 def execute_take(item_id):
     """This function takes an item_id as an argument and moves this item from the
     list of items in the current room to the player's inventory. However, if
     there is no such item in the room, this function prints
-    "You cannot take that."""
-    global inventory
-    global current_room
-
+    "You cannot take that."
+    """
+    item_exists = False
     for item in current_room["items"]:
-        if item["id"] == item_id:
-            inventory.append(item)
+        if item_id == item["id"]:
+            item_exists = True
             current_room["items"].remove(item)
-            return
-    print("You cannot take that.")
+            inventory.append(item)
+            print(item["name"] + " added to inventory.")        
+        return
+    else:
+        print("You cannot take that")
+    pass
+    
 
 def execute_drop(item_id):
     """This function takes an item_id as an argument and moves this item from the
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    global inventory
-    global current_room
+    item_now = False
 
+    
     for item in inventory:
-        if item["id"] == item_id:
+        if item_id == item["id"]:
+            item_now == True
             current_room["items"].append(item)
             inventory.remove(item)
-            return
-    print("You cannot drop that.")
-            
+            print(item["name"] + " dropped from inventory")    
+        return
+        if item_now == False:
+            print ("You cannot drop that.")
     pass
     
 
