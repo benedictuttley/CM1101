@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+#!/usr/bin/python3
 
 from map import rooms
 from player import *
@@ -250,17 +251,20 @@ def execute_take(item_id):
     there is no such item in the room, this function prints
     "You cannot take that."
     """
-    item_exists = False
-    for item in current_room["items"]:
-        if item_id == item["id"]:
-            item_exists = True
-            current_room["items"].remove(item)
-            inventory.append(item)
-            print(item["name"] + " added to inventory.")        
-        return
+     
+    check = False
+    for items in inventory:
+        for thing in current_room["items"]:
+            if thing["id"] == item_id:
+                check = True
+                thingyes = thing
+    if check == True:
+        current_room["items"].remove(thingyes)
+        inventory.append(thingyes)
     else:
-        print("You cannot take that")
-    pass
+        print("You cannot take that.")
+
+
     
 
 def execute_drop(item_id):
@@ -268,19 +272,17 @@ def execute_drop(item_id):
     player's inventory to list of items in the current room. However, if there is
     no such item in the inventory, this function prints "You cannot drop that."
     """
-    item_now = False
+    check = False
+    for items in inventory:
+        if items["id"] == item_id:
+            check = True
+            itemsyes = items
+    if check == True:
+        inventory.remove(itemsyes)
+        current_room["items"].append(itemsyes)
+    else:
+        print("You cannot drop that.")
 
-    
-    for item in inventory:
-        if item_id == item["id"]:
-            item_now == True
-            current_room["items"].append(item)
-            inventory.remove(item)
-            print(item["name"] + " dropped from inventory")    
-        return
-        if item_now == False:
-            print ("You cannot drop that.")
-    pass
     
 
 def execute_command(command):
@@ -376,5 +378,6 @@ def main():
 # See https://docs.python.org/3.4/library/__main__.html for explanation
 if __name__ == "__main__":
     main()
+
 
 
